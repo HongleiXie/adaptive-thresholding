@@ -6,16 +6,16 @@
 	  
 	library(mvtnorm);
 	library(parallel);
-  # need some functions
-  #dir.path <- '~/Dropbox/RA';
-  dir.path <- '~/MyDocuments';
+        # need some functions
+        #dir.path <- '~/Dropbox/RA';
+        dir.path <- '~/MyDocuments';
 	
 	source(file.path(dir.path, 'sim.R'));
-  source(file.path(dir.path, 'generate.model.data.R'));
+        source(file.path(dir.path, 'generate.model.data.R'));
   
-  p <- 200;
+        p <- 200;
   
-  loss_hard <- mclapply(
+        loss_hard <- mclapply(
                   1:100, # 100 replications
                   mc.cores = detectCores() -1,
                   FUN = function(x) {
@@ -23,19 +23,19 @@
                         }
                   );
     
-  loss_hard <- matrix(unlist(loss_hard), ncol = 2, byrow = TRUE);
-  write.table(loss_hard, file.path(dir.path, 'loss_hard.txt'));
+       loss_hard <- matrix(unlist(loss_hard), ncol = 2, byrow = TRUE);
+       write.table(loss_hard, file.path(dir.path, 'loss_hard.txt'));
   
-# 	loss_al <- mclapply(
-# 	  1:100, # 100 replications
-# 	  mc.cores = detectCores() -1,
-# 	  FUN = function(x) {
-# 	    sim(p = p, n = 100, thresholding = 'al', model = 'm1')
-# 	    }
-# 	  );
-# 	
-# 	loss_al <- matrix(unlist(loss_al), ncol = 2, byrow = TRUE);
-# 	write.table(loss_al, file.path(dir.path, 'loss_al.txt'));
+       # 	loss_al <- mclapply(
+       # 	  1:100, # 100 replications
+       # 	  mc.cores = detectCores() -1,
+       # 	  FUN = function(x) {
+       # 	    sim(p = p, n = 100, thresholding = 'al', model = 'm1')
+       # 	    }
+       # 	  );
+       # 	
+       # 	loss_al <- matrix(unlist(loss_al), ncol = 2, byrow = TRUE);
+       # 	write.table(loss_al, file.path(dir.path, 'loss_al.txt'));
   
   
 	results <- function(loss) {
